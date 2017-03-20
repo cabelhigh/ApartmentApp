@@ -11,14 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320180528) do
+ActiveRecord::Schema.define(version: 20170320221523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "apartments", force: :cascade do |t|
-    t.string   "street1"
-    t.string   "street2"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "unit_number"
     t.string   "city"
     t.string   "postal"
     t.string   "state"
@@ -27,8 +31,6 @@ ActiveRecord::Schema.define(version: 20170320180528) do
     t.string   "phone_number"
     t.time     "opens_at"
     t.time     "closes_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
   end
 
 end

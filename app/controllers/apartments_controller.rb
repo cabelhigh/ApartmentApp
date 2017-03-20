@@ -1,11 +1,6 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
-  # Story: As an internet user, I can go to a web page and see a list of apartments. 
-  # Apartments have two street designations, and a city, postal code, state, country, in a addition to contact info: name, phone number, hours to contact
-  # Hint: Use just one table.
-  # Hint: Devide the story into smaller tasks; commit to git when each task is complete.
-
   # GET /apartments
   # GET /apartments.json
   def index
@@ -66,6 +61,16 @@ class ApartmentsController < ApplicationController
     end
   end
 
+  def map_location
+    @apartment = Apartment.find(params[:apartment_id])
+    @hash = Gmaps4rails.build_markers(@apartment) do |apartment, marker|
+      marker.lat(apartment.latitude)
+      marker.lng(apartment.longitude)
+      marker.infowindow("<em>" + apartment.address + "</em>")
+    end
+    render json: @hash.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
@@ -74,6 +79,6 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:street1, :street2, :city, :postal, :state, :country, :name, :phone_number, :opens_at, :closes_at)
+      params.require(:apartment).permit(:latitude, :longitude, :address, :city, :state, :country, :postal, :name, :phone_number, :open_at, :closes_at, :unit_number)
     end
 end
