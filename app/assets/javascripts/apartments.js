@@ -23,7 +23,8 @@ function showLocations(dataFromServer){
     markers = handler.addMarkers(dataFromServer);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    handler.getMap().setZoom(12);
+    handler.getMap().setZoom(10);
+    handler.getMap().setCenter(new google.maps.LatLng(32.8245525,-117.0951633))
   }
 );
 }
@@ -49,7 +50,7 @@ function loadAndCreateGmap() {
   else if ($("#index_map").length > 0) {
     $.ajax({
       dataType: 'json',
-      url: '/apartments',
+      url: '/all_markers',
       method: 'GET',
       success:function(dataFromServer){
         showLocations(dataFromServer)

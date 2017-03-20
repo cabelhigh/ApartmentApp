@@ -71,10 +71,20 @@ class ApartmentsController < ApplicationController
     render json: @hash.to_json
   end
 
+  def show_all_apartments
+    @all_apartments = Apartment.all
+    @hash = Gmaps4rails.build_markers(@all_apartments) do |apartment, marker|
+      marker.lat(apartment.latitude)
+      marker.lng(apartment.longitude)
+      marker.infowindow("<em>" + apartment.address + "</em>")
+    end
+    render json: @hash.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
-      @apartment = Apartment.find(params[:id])
+      @apartment = Apartment.find(params[:id]) if !params[:id].nil? || params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
