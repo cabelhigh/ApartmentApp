@@ -1,23 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to image_tag(@apartment.image.url(:large)), @apartment.image.url %>
+
 <p>
-  <strong>Latitude:</strong>
-  <%= @apartment.latitude %>
+  <strong>Name:</strong>
+  <%= @apartment.name %>
 </p>
 
 <p>
-  <strong>Longitude:</strong>
-  <%= @apartment.longitude %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @apartment.address %>
-</p>
-
-<p>
-  <strong>Unit Number:</strong>
-  <%= @apartment.unit_number %>
+  <strong>Street Address:</strong>
+  <%= @apartment.street_address %>
 </p>
 
 <p>
@@ -29,9 +21,25 @@
   <strong>State:</strong>
   <%= @apartment.state %>
 </p>
+
 <p>
-  <strong>Zip</strong>
+  <strong>Postal Code:</strong>
   <%= @apartment.postal %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @apartment.country %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @apartment.phone_number %>
+</p>
+
+<p>
+  <strong>Hours of Operation:</strong>
+  <%= @apartment.opens_at %> - <%= @apartment.closes_at %>
 </p>
 
 <%= link_to 'Edit', edit_apartment_path(@apartment) %> |
