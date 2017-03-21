@@ -66,7 +66,7 @@ class ApartmentsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@apartment) do |apartment, marker|
       marker.lat(apartment.latitude)
       marker.lng(apartment.longitude)
-      marker.infowindow("<em>" + apartment.address + "</em>")
+      marker.infowindow("<strong>" + apartment.name + "</strong><br><em>" + apartment.address + "</em><br>" + apartment.phone_number + "<br>" + apartment.opens_at + " - " + apartment.closes_at)
     end
     render json: @hash.to_json
   end
@@ -76,7 +76,7 @@ class ApartmentsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@all_apartments) do |apartment, marker|
       marker.lat(apartment.latitude)
       marker.lng(apartment.longitude)
-      marker.infowindow("<em>" + apartment.address + "</em>")
+      marker.infowindow("<strong>" + apartment.name + "</strong><br><em>" + apartment.address + "</em><br>" + apartment.phone_number + "<br>" + apartment.opens_at + " - " + apartment.closes_at)
     end
     render json: @hash.to_json
   end
@@ -89,6 +89,6 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:latitude, :longitude, :address, :city, :state, :country, :postal, :name, :phone_number, :open_at, :closes_at, :unit_number)
+      params.require(:apartment).permit(:latitude, :longitude, :address, :city, :state, :country, :postal, :name, :phone_number, :opens_at, :closes_at, :street_address, :image)
     end
 end
